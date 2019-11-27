@@ -56,12 +56,18 @@ class WerewolfTest < Minitest::Test
 
   def test_is_not_hungry_by_default
     skip
-    # your code here
+    werewolf = Werewolf.new("Penny","Denver")
+    
+    refute werewolf.hungry?
   end
 
   def test_becomes_hungry_after_changing_to_a_werewolf
     skip
-    # your code here
+    
+    werewolf = Werewolf.new("Penny","Denver")
+    werewolf.change!
+    
+    assert werewolf.hungry?
   end
 
   class Victim
@@ -74,22 +80,40 @@ class WerewolfTest < Minitest::Test
 
   def test_consumes_a_victim
     skip
-    # your code here
+    victim = Victim.new
+    werewolf = Werewolf.new("Penny", "Denver")
+    werewolf.change!
+    assert werewolf.consume(victim)
   end
   
   def test_cannot_consume_victim_if_in_human_form
     skip
-    # your code here
+    victim = Victim.new
+    werewolf = Werewolf.new("Penny", "Denver")
+    assert werewolf.human?
+    refute werewolf.consume(victim)
   end
 
   def test_a_werewolf_who_has_consumed_a_victim_is_no_longer_hungry
     skip
-    # your code here
+    victim = Victim.new
+    werewolf = Werewolf.new("Penny", "Denver")
+    werewolf.change!
+    assert werewolf.hungry? 
+    
+    werewolf.consume(victim)
+    
+    refute werewolf.hungry?
   end
 
   def test_a_werewolf_who_has_consumed_a_victim_makes_the_victim_dead
     skip
-    # your code here
+    victim = Victim.new
+    assert_equal :alive, victim.status
+    werewolf = Werewolf.new("Penny", "Denver")
+    werewolf.change!
+    werewolf.consume(victim)
+    assert_equal :dead, victim.status
   end
 
 end
