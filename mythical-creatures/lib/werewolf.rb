@@ -7,31 +7,27 @@ class Werewolf
     @hungry = false
   end
   
-  def consume(victim)
-    return false if human?
-    @hungry = false
-    kill_victim(victim)
-    true
-  end
-  
-  def kill_victim(victim)
-    victim.status = :dead
-  end
-  
-  def hungry?
-    hungry
-  end
-  
   def human?
     human
+  end
+  
+  def change!
+    @human = !human
+    @hungry = true
   end
   
   def wolf?
     !human
   end
   
-  def change!
-    @human = !human
-    @hungry = true
+  def hungry?
+    hungry
+  end
+  
+  def consume(victim)
+    return false if human?
+    @hungry = false
+    victim.status = :dead
+    return true
   end
 end
