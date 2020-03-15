@@ -1,5 +1,9 @@
 class LeatherChair
   attr_reader :exposed
+  def initialize
+    @exposed = false
+  end
+  
   def faded?
     exposed
   end
