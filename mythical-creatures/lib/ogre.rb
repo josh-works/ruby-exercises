@@ -34,6 +34,7 @@ class Human
   
   def revive
     @knocked_out = false
+    @encounter_counter = 0
   end
   
   def encounter_ogre
@@ -45,7 +46,7 @@ class Human
   end
   
   def notices_ogre?
-    return true if encounter_counter % 3 == 0
+    encounter_counter % 3 == 0
   end
   
   def knocked_out?
