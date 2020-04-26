@@ -8,9 +8,11 @@ class Ogre
   end
   
   def encounter(human)
-    human.encounter_ogre
     @encounter_counter += 1
-    swing_at(human) if human.notices_ogre?
+    human.increment_encounters
+    if human.notices_ogre?
+      swing_at(human)
+    end
   end
   
   def swing_at(human)
@@ -18,27 +20,27 @@ class Ogre
     human.knock_unconscious if swings % 2 == 0
   end
   
-  def apologize(human)
+  def apologize(human) 
     human.revive
+    @swings = 0
   end
 end
 
-
 class Human
   attr_reader :name, :encounter_counter, :knocked_out
-  def initialize(name = 'Jane')
+  def initialize(name = "Jane")
     @name = name
     @encounter_counter = 0
     @knocked_out = false
   end
   
-  def revive
-    @knocked_out = false
-    @encounter_counter = 0
+  def increment_encounters
+    @encounter_counter += 1
   end
   
-  def encounter_ogre
-    @encounter_counter += 1
+  def revive
+    @encounter_counter = 0
+    @knocked_out = false
   end
   
   def knock_unconscious
