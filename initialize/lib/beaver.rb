@@ -1,9 +1,9 @@
 class Beaver
   def initialize(name)
-    @name = name
+    @given_name = name
   end
   
   def name
-     + " the Beaver"
+    @given_name + " the Beaver"
   end
 end
